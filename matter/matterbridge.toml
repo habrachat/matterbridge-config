@@ -1,0 +1,32 @@
+[sshchat.mychat]
+Server="habra.chat:22"
+Nick="UFO"
+IgnoreNicks="UFO"
+RemoteNickFormat="[{LABEL}] {NICK} "
+#RemoteNickFormat="/impersonate \"{NICK} [{LABEL}]\" "
+Label="S"
+
+[telegram.mytelegram]
+Token="TELEGRAM:TOKEN"
+RemoteNickFormat="[{LABEL}] <code>&lt;{NICK}&gt;</code> "
+MessageFormat="HTML"
+Label="T"
+ReplaceMessages=[ ["\n","\r\n"] ]
+
+[[gateway]]
+name="gateway1"
+enable=true
+
+[[gateway.inout]]
+account="sshchat.mychat"
+channel="sshchat"
+
+[[gateway.inout]]
+account="telegram.mytelegram"
+channel="-1001200239638"
+
+[general]
+MediaDownloadPath="/var/www/images/"
+MediaServerDownload="https://img.habra.chat"
+ReplaceMessages=[ ["<br>","\n"] ]
+
