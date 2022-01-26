@@ -1,9 +1,10 @@
 [sshchat.mychat]
-Server="habra.chat:22"
+Server="habra.chat:22" # eg "localhost:2022" or "1.2.3.4:22"
 Nick="UFO"
 IgnoreNicks="UFO"
-RemoteNickFormat="[{LABEL}] {NICK} "
+#RemoteNickFormat="[{LABEL}] {NICK} "
 #RemoteNickFormat="/impersonate \"{NICK} [{LABEL}]\" "
+RemoteNickFormat="/impersonate \"[{LABEL}] {NICK}\" "
 Label="S"
 
 [telegram.mytelegram]
@@ -12,6 +13,31 @@ RemoteNickFormat="[{LABEL}] <code>&lt;{NICK}&gt;</code> "
 MessageFormat="HTML"
 Label="T"
 ReplaceMessages=[ ["\n","\r\n"] ]
+
+[matrix.matrixorg]
+Server="https://matrix.org"
+Login="LOGIN"
+Password="PASSWORD"
+RemoteNickFormat="[{LABEL}] <{NICK}> "
+NoHomeServerSuffix=true
+Label="M"
+
+[irc.libera]
+Nick="habrabridge"
+NickServNick="habrabridge"
+Server="irc.libera.chat:6697"
+UseTLS=true
+SkipTLSVerify=false
+RunCommands=["PRIVMSG nickserv :IDENTIFY habrabridge %HASH%"]
+RemoteNickFormat="[{LABEL}] <{NICK}> "
+Label="I"
+
+[discord.habrachat]
+Token="DISCORD.TOKEN.HABRACHAT"
+Server="SERVER ID"
+RemoteNickFormat="[{LABEL}] <{NICK}> "
+Label="D"
+AutoWebhooks=true
 
 [[gateway]]
 name="gateway1"
@@ -25,8 +51,19 @@ channel="sshchat"
 account="telegram.mytelegram"
 channel="-1001200239638"
 
+[[gateway.inout]]
+account="matrix.matrixorg"
+channel="#habrachat2022:matrix.org"
+
+[[gateway.inout]]
+account="irc.libera"
+channel="#habrachat"
+
+[[gateway.inout]]
+account="discord.habrachat"
+channel="general"
+
 [general]
 MediaDownloadPath="/var/www/images/"
 MediaServerDownload="https://img.habra.chat"
 ReplaceMessages=[ ["<br>","\n"] ]
-
